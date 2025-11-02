@@ -1,0 +1,11 @@
+This submission documents customer segmentation for a retail-bank dataset (10,243 rows, 44 variables), including data cleaning, EDA, and two parallel segmentation approaches: rule-based RFM and unsupervised (K-means). 
+
+For cleaning, I removed a lot of NaN data from categoricals, as well as replaced missing data in numericals with averages. Additionally, I made some fixes to some of the categorical data to avoid biases. As a result, 60-70% of the initial data was removed (most of it was not from bank clients).
+
+For RFM, I mapped Recency/Frequency/Monetary to three existing variables from the dataset - min_MnthAfterLoan, numAccountActiveAll, sum_of_paym_months, and defined five business segments (VIP, Core, Potential, At-Risk, Churn). After segmentation, all five of the resulting segments ended up being similar in size to each other. 
+
+For K-means, I implemented a deterministic variant of the algorithm to make my results reproducible and chose the optimal k via multiple criteria (silhouette, V-measure stability, DBI, CHS, elbow). The final solution produced five clusters: three are dominant (≈86% combined) and two are smaller. Visual diagnostics (PCA/UMAP) confirm separation of segments. 
+
+After segmentation, customer profiles & business recommendations for both methods were written. RFM proved as a more valuable method for immediate business projections, whereas K-Means would show itself as a method that is more useful for finding clusters not intuitive to a naked eye.
+
+If RFM and KMeans were the only two options available, I would recommend that the bank adopt RFM as the main segmentation method, with KMeans being used to find interesting subsegments inside the top-level segments to facilitate personalisation for each of its clients.
